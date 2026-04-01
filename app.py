@@ -189,5 +189,14 @@ with tab2:
 
             st.markdown("### Data Preview")
             st.dataframe(df[[text_col, 'Predicted_Sentiment']])
+            
+            # Allow user to download the processed batch data
+            csv = df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Download Processed Data",
+                data=csv,
+                file_name="sentiment_analysis_results.csv",
+                mime="text/csv",
+            )
         else:
             st.error("CSV must contain 'Summary' or 'Review'")
